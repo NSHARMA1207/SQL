@@ -1,0 +1,253 @@
+create database bit
+use bit
+
+create table course2(
+course_id int ,
+course_desc varchar(50),
+course_mentor varchar(60),
+course_price int,
+course_discount int,
+create_date date,
+user_info varchar(50))
+
+select * from course2;
+
+select user()
+select sysdate()
+
+select
+create table ref_course (
+record_insert_date date,
+record_insert_user varchar(50))
+
+select * from ref_course
+
+
+
+DELIMITER //
+CREATE TRIGGER COURSE_BEFORE_INSERT1211
+BEFORE INSERT
+ON Course2 FOR EACH ROW
+BEGIN
+declare user_val varchar(50);
+set new.create_date = sysdate();
+select user() into user_val;
+select new.user_info = user_val;
+insert into ref_course values(sysdate() , user_val);
+end; //
+
+delimiter //
+create trigger course_before_insert1123
+before insert 
+on course2 for each row
+begin
+	declare user_val varchar(50);
+	set new.create_date = sysdate();
+    select user() into  user_val;
+    set new.user_info = user_val;
+    insert into ref_course values(sysdate() , user_val);
+    
+end; //
+
+INSERT INTO Course2 (course_id,course_desc,course_mentor,
+course_price,course_discount) value(101,"FSDS","JALPA",1000,10)
+
+SELECT * FROM COURSE2
+
+create table test1(
+c1 varchar(50),
+c2 Date,
+c3 int)
+
+create table test2(
+c1 varchar(50),
+c2 Date,
+c3 int)
+
+create table test3(
+c1 varchar(50),
+c2 Date,
+c3 int)
+
+select * from test1;
+
+delimiter //
+create trigger to_update_others
+before insert on test1 for each row
+begin
+     insert into test2 values("xyz",sysdate(),23354);
+     insert into test3 values("xyz",sysdate(),23355);
+     end; //
+     
+insert into test1 values("Naveen",sysdate(),234234)     
+insert into test1 values("Naveen",sysdate(),234234)
+
+select * from test2;
+
+CREATE DATABASE BIT_PARTITION
+USE BIT_PARTITION
+
+CREATE TABLE BIT_COURSE(
+COURSE_NAME VARCHAR(50) ,
+COURSE_ID INT(10) ,
+COURSE_TITLE VARCHAR(60) ,
+COURSE_DESC VARCHAR(60) ,
+LAUNCH_DATE DATE,
+COURSE_FEE INT,
+COURSE_MENTOR VARCHAR(60) ,
+COURSE_LAUNCH_YEAR INT)
+
+SELECT * FROM BIT_PARTITION.BIT_COURSE;
+
+INSERT INTO BIT_COURSE(COURSE_NAME,COURSE_ID,COURSE_TITLE,COURSE_DESC,LAUNCH_DATE,COURSE_FEE,COURSE_MENTOR,COURSE_LAUNCH_YEAR)
+VALUES
+('machine_learning' , 101 , 'ML', "this is ML course" ,'2019-07-07',3540,'jalpa',2019) ,
+('aiops' , 101 , 'ML', "this is aiops course" ,'2019-07-07',3540,'jalpa',2019) ,
+('dlcvnlp' , 101 , 'ML', "this is ML course" ,'2020-07-07',3540,'jalpa',2020) ,
+('aws cloud' , 101 , 'ML', "this is ML course" ,'2020-07-07',3540,'jalpa',2020) ,
+('blockchain' , 101 , 'ML', "this is ML course" ,'2021-07-07',3540,'jalpa',2021) ,
+('RL' , 101 , 'ML', "this is ML course" ,'2022-07-07',3540,'jalpa',2022) ,
+('Dl' , 101 , 'ML', "this is ML course" ,'2022-07-07',3540,'jalpa',2022) ,
+('interview prep' , 101 , 'ML', "this is ML course" ,'2019-07-07',3540,'jalpa',2019) ,
+('big data' , 101 , 'ML', "this is ML course" ,'2020-07-07',3540,'sudhanshu',2020) ,
+('data analytics' , 101 , 'ML', "this is ML course" ,'2021-07-07',3540,'jalpa',2021) ,
+('fsds' , 101 , 'ML', "this is ML course" ,'2022-07-07',3540,'jalpa',2022) ,
+('fsda' , 101 , 'ML', "this is ML course" ,'2021-07-07',3540,'jalpa',2021) ,
+('fabe' , 101 , 'ML', "this is ML course" ,'2022-07-07',3540,'jalpa',2022) ,
+('java' , 101 , 'ML', "this is ML course" ,'2020-07-07',3540,'jalpa',2020) ,
+('MERN' , 101 , 'ML', "this is ML course" ,'2019-07-07',3540,'jalpa',2019) 
+
+SELECT * FROM BIT_COURSE;
+
+SELECT * ,
+CASE
+    WHEN COURSE_NAME = 'fsda' then sysdate()
+    WHEN COURSE_NAME = 'fsds' then system_user()
+    ELSE "THIS IS NOT YOUR BATCH"
+    END AS STATEMENT
+    FROM BIT_COURSE;
+    
+    select * ,
+    case 
+        when length(course_name) = 4 then "len 4"
+        when length(course_name) = 2 then "len 2"
+        else "other length"
+        end as statement
+        from bit_course;
+        
+        update bit_course
+        set course_title =
+        case
+            when course_title = 'ML' then "machine learning"
+		else 0
+        end;
+        
+        select * ,
+        case
+            when course_launch_year = '2019' then 'course launch 2019'
+            when course_launch_year = '2020' then 'course launch 2020'
+            when course_launch_year = '2021' then 'course launch 2021'
+            else "there is no course selected"
+	end as statement
+    from bit_course
+    
+    create database if not exists company;
+    use company;
+     create table if not exists employee1
+     (id INT,
+     `Name` VARCHAR(50) NOT NULL,
+     GENDER VARCHAR(50) NOT NULL,
+     SALARY INT NOT NULL,
+     DEPARTMENT VARCHAR(50) NOT NULL
+     );
+     
+     SELECT * FROM EMPLOYEE1;
+     
+     INSERT INTO employee1 VALUES
+     (1, 'JALPESH','MALE',5000,'SALES'),
+	 (2, 'SNEHA','FEMALE',6000,'HR'),
+	 (3, 'KARTI','FEMALE',8000,'IT'),
+     (4, 'VIHA','FEMALE',9000,'MARKETING'),
+     (5, 'VRINDA','FEMALE',1000,'QUALITY'),
+     (6, 'SUSHMITA','FEMALE',12000,'PRODUCTION'),
+     (7, 'KALAWATI','FEMALE',16000,'HR'),
+     (8, 'BHANUPRIYA','FEMALE',17000,'IT'),
+     (9, 'KULWASHI','FEMALE',9000,'HR'),
+     (10, 'DHANASHREE','FEMALE',6000,'SALES'),
+     (11, 'KANIKA','FEMALE',7000,'IT'),
+     (12, 'NAVEEN','MALE',18000,'HR');
+     
+     SELECT * FROM EMPLOYEE1;
+     
+     SELECT DEPARTMENT, SUM(SALARY) AS SALARY_SUM
+     FROM EMPLOYEE1 GROUP BY DEPARTMENT;
+     
+   SELECT DEPARTMENT, SUM(SALARY) AS SALARY_SUM
+     FROM EMPLOYEE1
+     GROUP BY DEPARTMENT WITH ROLLUP
+     
+     SELECT COALESCE(DEPARTMENT, 'ALL DEPARTMENTS') AS DEPARTMENT ,
+     SUM(SALARY) AS SALARY_SUM
+     FROM EMPLOYEE1
+     GROUP BY DEPARTMENT WITH ROLLUP
+     
+     SELECT
+     COALESCE(DEPARTMENT, 'ALL DEPARTMENTS') AS DEPARTMENT,
+     COALESCE (GENDER, 'ALL GENDERS') AS GENDER,
+     SUM(SALARY) AS SALARY_SUM
+     FROM EMPLOYEE1
+     GROUP BY DEPARTMENT, GENDER WITH ROLLUP
+     
+     create database index1
+     use index1
+     
+     create table if not exists course1 (
+     course_id int,
+     course_name varchar (50),
+     course_desc varchar(60),
+     course_tag varchar(50))
+     
+insert into course1 values
+(101 ,'fsda','full stack data analytics','Analytics'),
+(102 , 'fsds' , 'full stack data analytics','Analytics'),
+(103 , 'fsds' , 'full stack data science' , 'DS'),
+(104 , 'big data' , 'full stack big data' , 'BD'),
+(105 , 'mern' , 'web dev' , 'mern'),
+(106 , 'blockchain' , 'full stack blockchain','BC'),
+(101 , 'java' , 'full stack java' , 'java'),
+(102 , 'testing' , 'full testing ' , 'testing ')
+
+select * from course1;
+
+create table if not exists Student1 (
+course_id int,
+     course_name varchar (50),
+     student_course_id varchar(60))
+     
+     insert into student1 values
+     ('01','Jofra Archer', '32'),
+     ('02','Yoan botha', '31'), 
+      ('03','Irfan Pathan', '22'),
+       ('04','Hardik Pandya', '33'),
+       ('05','Axar Patel','28')
+       
+       select * from student1;
+       
+       select c.course_id,c.course_name,c.course_desc,
+       c.course_id,c.course_name,s.student_course_id from course1 c
+       cross join student1 s
+     
+with recursive cte1 as
+(select 1 as n union all select n+1 from cte1 where n<5)
+select * from cte1
+
+with recursive cte as (
+select 1 as n, 1 as p, -1 as q
+union all
+select n+1, p+2, q+4 from cte where n<5)
+select * from cte
+
+select customers.customerName, Orders. OrderID
+from customers
+cross Join orders;
+
